@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
-<%- include('partials/head', {title: '¿?'}) %>
+<%- include('partials/head', {title: product.name}) %>
 <body>
 	<!-- Header -->
 	<%- include('partials/headerNavbar') %>
@@ -53,7 +53,7 @@
 						<hr>
 
 						<a href="/products/edit/<%=product.id%>" class="action-button edit">EDITAR PRODUCTO</a>
-						<form action="/products/delete/<%=product.id%>" method="POST" style="display: inline-flex">
+						<form action="/products/<%=product.id%>?_method=delete" method="post" style="display: inline-flex">
 							<button type="submit" class="action-button delete">ELIMINAR</button>
 						</form>
 					</article>

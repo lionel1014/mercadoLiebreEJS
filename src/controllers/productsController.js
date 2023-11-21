@@ -6,6 +6,11 @@ const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
+const findProductbyId = ({params}) => {
+	const product = products.find(product => product.id == params.id);
+	return product;
+}
+
 const controller = {
 	// Root - Show all products
 	index: (req, res) => {
@@ -14,7 +19,7 @@ const controller = {
 
 	// Detail - Detail from one product
 	detail: (req, res) => {
-		const product = products.find(product => product.id == req.params.id);
+		const product = findProductbyId(req)
 		res.render("detail",{product})
 	},
 
@@ -35,7 +40,8 @@ const controller = {
 			price,
 			discount,
 			category,
-			description
+			description,
+			image: 'default-image-png'
 		};
 
 		// Agregar el nuevo producto al array de productos
@@ -50,16 +56,41 @@ const controller = {
 
 	// Update - Form to edit
 	edit: (req, res) => {
-		// Do the magic
+		const product = findProductbyId(req);
+		res.render("product-edit-form",{product})
 	},
 	// Update - Method to update
 	update: (req, res) => {
-		// Do the magic
+		const productId = req.params.id;
+		const { name, price, discount, category, description } = req.body;
+		const productIndex = products.findIndex(product => product.id == productId);
+
+		if (productIndex !== -1) {
+			products[productIndex].name = name;
+			products[productIndex].price = price;
+			products[productIndex].discount = discount;
+			products[productIndex].category = category;
+			products[productIndex].description = description;
+
+			fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2), 'utf-8');
+			res.redirect(`/products/${productId}`);
+		} else {
+			res.status(404).send('Producto no encontrado');
+		}
 	},
 
 	// Delete - Delete one product from DB
 	destroy : (req, res) => {
-		// Do the magic
+		const productId = req.params.id;
+		const restProducts = products.filter(product => product.id != productId);
+
+		if (restProducts !== -1) {
+
+			fs.writeFileSync(productsFilePath, JSON.stringify(restProducts, null, 2), 'utf-8');
+			res.redirect(`/`);
+		} else {
+			res.status(404).send('Producto no borrado');
+		}
 	}
 };
 

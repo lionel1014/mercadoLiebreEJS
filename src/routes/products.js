@@ -17,12 +17,12 @@ router.get('/create', productsController.create);
 router.get('/:id/', productsController.detail); 
 
 /*** EDIT ONE PRODUCT ***/ 
-// router.get('/:id/???', productsController.edit); 
-router.get('/:id', productsController.update); 
+router.get('/edit/:id', productsController.edit); 
+router.put('/:id', productsController.update); 
 
 
 /*** DELETE ONE PRODUCT***/ 
-router.get('/:id', productsController.destroy); 
+router.delete('/:id', productsController.destroy); 
 
 
 module.exports = router;

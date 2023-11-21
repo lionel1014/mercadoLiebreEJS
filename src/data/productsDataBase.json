@@ -75,8 +75,8 @@
     "id": 9,
     "name": "Teclado Apple Magic Inalámbrico",
     "description": "El teclado mágico combina un diseño elegante con una batería recargable incorporada y funciones clave mejoradas. Con un mecanismo de tijera estable debajo de cada tecla, así como un recorrido de teclas optimizado y un perfil bajo, el Teclado Mágico ofrece una experiencia de escritura notablemente cómoda y precisa.",
-    "price": 11399,
-    "discount": 0,
+    "price": "11399",
+    "discount": "10",
     "image": "img-apple-magic-keyboard.jpg",
     "category": "visited"
   },
@@ -87,15 +87,6 @@
     "price": 1200,
     "discount": 10,
     "image": "img-mouse-logitech.jpg",
-    "category": "visited"
-  },
-  {
-    "id": 11,
-    "name": "Parlante Inalámbrico Bose Soundtouch 10",
-    "description": "Parlante Inalámbrico Bose Soundtouch 10. SoundTouch®.La manera más sencilla de reproducir música en todo su hogar de forma inalámbrica. Características. » Marca: Bose. » Modelo: SoundTouch. » Color: Negro",
-    "price": 29990,
-    "discount": 12,
-    "image": "img-parlante-bose.jpg",
     "category": "visited"
   },
   {
