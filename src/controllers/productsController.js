@@ -11,6 +11,19 @@ const findProductbyId = ({params}) => {
 	return product;
 }
 
+const error404 = (message = "Producto no encontrado") => {
+	const error = {
+		status: 404,
+		stack: message,
+	};
+
+	res.status(404).render("error", {
+		message: "Producto no encontrado",
+		path: req.originalUrl,
+		error,
+	});
+}
+
 const controller = {
 	// Root - Show all products
 	index: (req, res) => {
@@ -20,7 +33,12 @@ const controller = {
 	// Detail - Detail from one product
 	detail: (req, res) => {
 		const product = findProductbyId(req)
-		res.render("detail",{product})
+
+		if(product){
+			res.render("detail",{product})
+		}else{
+			error404();
+		}
 	},
 
 	// Create - Form to create
@@ -30,12 +48,10 @@ const controller = {
 	
 	// Create -  Method to store
 	store: (req, res) => {
-		// Obtener datos del formulario
 		const { name, price, discount, category, description} = req.body;
 
-		// Crear un nuevo objeto de producto
 		const newProduct = {
-			id: products.length + 1, // Puedes generar el ID de manera más sofisticada si es necesario
+			id: products.length + 1,
 			name,
 			price,
 			discount,
@@ -43,22 +59,24 @@ const controller = {
 			description,
 			image: 'default-image-png'
 		};
-
-		// Agregar el nuevo producto al array de productos
 		products.push(newProduct);
 
 		// Guardar el array actualizado en el archivo
 		fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2), 'utf-8');
 
-		// Redireccionar a la página de detalles del nuevo producto
 		res.redirect(`/products/${newProduct.id}`);
 	},
 
 	// Update - Form to edit
 	edit: (req, res) => {
 		const product = findProductbyId(req);
-		res.render("product-edit-form",{product})
+		if(product){
+			res.render("product-edit-form",{product})
+		}else{
+			error404();
+		}
 	},
+
 	// Update - Method to update
 	update: (req, res) => {
 		const productId = req.params.id;
@@ -75,7 +93,7 @@ const controller = {
 			fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2), 'utf-8');
 			res.redirect(`/products/${productId}`);
 		} else {
-			res.status(404).send('Producto no encontrado');
+			error404("Producto no actualizado");
 		}
 	},
 
@@ -89,7 +107,7 @@ const controller = {
 			fs.writeFileSync(productsFilePath, JSON.stringify(restProducts, null, 2), 'utf-8');
 			res.redirect(`/`);
 		} else {
-			res.status(404).send('Producto no borrado');
+			error404("Producto no borrado");
 		}
 	}
 };
