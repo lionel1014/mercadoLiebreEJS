@@ -11,7 +11,7 @@ const findProductbyId = ({params}) => {
 	return product;
 }
 
-const error404 = (message = "Producto no encontrado") => {
+const error404 = ({req,res}, message = "Producto no encontrado") => {
 	const error = {
 		status: 404,
 		stack: message,
@@ -37,7 +37,7 @@ const controller = {
 		if(product){
 			res.render("detail",{product})
 		}else{
-			error404();
+			error404({req,res});
 		}
 	},
 
@@ -73,7 +73,7 @@ const controller = {
 		if(product){
 			res.render("product-edit-form",{product})
 		}else{
-			error404();
+			error404({req,res});
 		}
 	},
 
@@ -93,7 +93,7 @@ const controller = {
 			fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2), 'utf-8');
 			res.redirect(`/products/${productId}`);
 		} else {
-			error404("Producto no actualizado");
+			error404({req,res},"Producto no actualizado");
 		}
 	},
 
@@ -107,7 +107,7 @@ const controller = {
 			fs.writeFileSync(productsFilePath, JSON.stringify(restProducts, null, 2), 'utf-8');
 			res.redirect(`/`);
 		} else {
-			error404("Producto no borrado");
+			error404({req,res},"Producto no borrado");
 		}
 	}
 };
