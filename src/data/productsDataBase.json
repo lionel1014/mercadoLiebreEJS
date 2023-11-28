@@ -150,5 +150,50 @@
     "discount": "0",
     "category": "in-sale",
     "image": "teclado.jpeg"
+  },
+  {
+    "id": 18,
+    "name": "TecladoGamerProopppasd",
+    "price": "1",
+    "discount": "0",
+    "category": "visited",
+    "description": "asdasd",
+    "image": "default-image-png"
+  },
+  {
+    "id": 19,
+    "name": "TecladoGamerProopppasd",
+    "price": "50000",
+    "discount": "0",
+    "category": "visited",
+    "description": "muchas cosas",
+    "image": "default-image-png"
+  },
+  {
+    "id": 20,
+    "name": "TecladoGamer",
+    "price": "50000",
+    "discount": "0",
+    "category": "visited",
+    "description": "aoisnjdoiansdddddddddddddddddddddddddddddddddddddddddddddddddddsdd",
+    "image": "default-image-png"
+  },
+  {
+    "id": 21,
+    "name": "ultimo",
+    "price": "1000000000000000",
+    "discount": "0",
+    "category": "in-sale",
+    "description": "asdasd",
+    "image": "default-image-png"
+  },
+  {
+    "id": 22,
+    "name": "mouse gamearasdasd",
+    "price": "10",
+    "discount": "0",
+    "category": "in-sale",
+    "description": "iubuib",
+    "image": "form-image-1700609648149.png"
   }
 ]

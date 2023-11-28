@@ -49,7 +49,7 @@ const controller = {
 	// Create -  Method to store
 	store: (req, res) => {
 		const { name, price, discount, category, description} = req.body;
-
+		
 		const newProduct = {
 			id: products.length + 1,
 			name,
@@ -57,7 +57,7 @@ const controller = {
 			discount,
 			category,
 			description,
-			image: 'default-image-png'
+			image: req.file ? req.file.filename : 'default-image-png'
 		};
 		products.push(newProduct);
 
